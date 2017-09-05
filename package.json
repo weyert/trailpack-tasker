@@ -1,8 +1,8 @@
 {
-  "name": "trailpack-tasker",
+  "name": "trailpack-tasker2",
   "version": "0.0.0",
   "description": "Easily set up background workers with RabbitMQ",
-  "homepage": "https://github.com/langateam/trailpack-tasker",
+  "homepage": "https://github.com/jaertgeerts/trailpack-tasker",
   "author": {
     "name": "Langa <hello@langa.io>",
     "email": "hello@langa.io",
@@ -39,6 +39,6 @@
   "eslintConfig": {
     "extends": "trails"
   },
-  "repository": "git@github.com:langateam/trailpack-tasker.git",
+  "repository": "git@github.com:jaertgeerts/trailpack-tasker.git",
   "license": "MIT"
 }
