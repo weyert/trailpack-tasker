@@ -214,6 +214,6 @@ MIT
 [ci-url]: https://travis-ci.org/jaertgeerts/trailpack-tasker
 [daviddm-image]: http://img.shields.io/david/jaertgeerts/trailpack-tasker.svg?style=flat-square
 [daviddm-url]: https://david-dm.org/jaertgeerts/trailpack-tasker
-[codeclimate-image]: https://img.shields.io/codeclimate/github/jaertgeerts/trailpack-tasker.svg?style=flat-square
-[codeclimate-url]: https://codeclimate.com/github/jaertgeerts/trailpack-tasker
+[codeclimate-image]: https://img.shields.io/codeclimate/github/JAertgeerts/trailpack-tasker.svg?style=flat-square
+[codeclimate-url]: https://codeclimate.com/github/JAertgeerts/trailpack-tasker
 
