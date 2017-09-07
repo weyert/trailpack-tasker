@@ -8,10 +8,12 @@
 Easily set up background workers with [RabbitMQ](https://www.rabbitmq.com/) and [Trails](http://trailsjs.io).
 This project is built on top of the [rabbot](https://github.com/arobson/rabbot) RabbitMQ client.
 
+Forked from [trailpack-tasker](https://github.com/langateam/trailpack-tasker) due to lack of maintanance.
+
 ## Install
 
 ```sh
-$ npm install --save trailpack-tasker
+$ npm install --save trailpack-tasker2
 ```
 
 ## Configure
@@ -23,7 +25,7 @@ $ npm install --save trailpack-tasker
 module.exports = {
   packs: [
     // ... other trailpacks
-    require('trailpack-tasker')
+    require('trailpack-tasker2')
   ]
 }
 ```
@@ -81,6 +83,10 @@ module.exports = {
       retryLimit: 3, // limits number of consecutive failed attempts
 
   },
+  /**
+   * Limit the amount of concurrent tasks, depending on the amount of workers increase this value.
+   */
+  concurrentTasks: 5,
 
   /**
    * Set worker to subscribe to tasks in the matching profile (tasker.profiles).
@@ -101,7 +107,7 @@ module.exports = {
      * Only load the packs needed by the workers
      */
     packs: [
-      require('trailpack-tasker')
+      require('trailpack-tasker2')
     ]
   }
 }
@@ -131,7 +137,7 @@ Define tasks in `api.tasks`.  Tasks are run by a worker processes.
 ```js
 // api/tasks/VideoEncoder.js
 
-const Task = require('trailpack-tasker').Task
+const Task = require('trailpack-tasker2').Task
 module.exports = class VideoEncoder extends Task {
 
   /**
@@ -202,15 +208,12 @@ cpuBound: NODE_ENV=worker WORKER=cpuBound npm start
 ## License
 MIT
 
-## Maintained By
-[<img src='http://i.imgur.com/Y03Jgmf.png' height='64px'>](https://langa.io)
-
-[npm-image]: https://img.shields.io/npm/v/trailpack-tasker.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/trailpack-tasker
-[ci-image]: https://img.shields.io/travis/langateam/trailpack-tasker/master.svg?style=flat-square
-[ci-url]: https://travis-ci.org/langateam/trailpack-tasker
-[daviddm-image]: http://img.shields.io/david/langateam/trailpack-tasker.svg?style=flat-square
-[daviddm-url]: https://david-dm.org/langateam/trailpack-tasker
-[codeclimate-image]: https://img.shields.io/codeclimate/github/langateam/trailpack-tasker.svg?style=flat-square
-[codeclimate-url]: https://codeclimate.com/github/langateam/trailpack-tasker
+[npm-image]: https://img.shields.io/npm/v/trailpack-tasker2.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/trailpack-tasker2
+[ci-image]: https://img.shields.io/travis/jaertgeerts/trailpack-tasker2/master.svg?style=flat-square
+[ci-url]: https://travis-ci.org/jaertgeerts/trailpack-tasker2
+[daviddm-image]: http://img.shields.io/david/jaertgeerts/trailpack-tasker2.svg?style=flat-square
+[daviddm-url]: https://david-dm.org/jaertgeerts/trailpack-tasker2
+[codeclimate-image]: https://img.shields.io/codeclimate/github/jaertgeerts/trailpack-tasker2.svg?style=flat-square
+[codeclimate-url]: https://codeclimate.com/github/jaertgeerts/trailpack-tasker2
 

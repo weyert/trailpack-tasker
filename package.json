@@ -1,12 +1,12 @@
 {
   "name": "trailpack-tasker2",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Easily set up background workers with RabbitMQ",
   "homepage": "https://github.com/jaertgeerts/trailpack-tasker",
   "author": {
-    "name": "Langa <hello@langa.io>",
-    "email": "hello@langa.io",
-    "url": "https://langa.io"
+    "name": "Jan Aertgeerts",
+    "email": "jan@veno.be",
+    "url": "https://github.com/jaertgeerts"
   },
   "main": "index.js",
   "keywords": [
