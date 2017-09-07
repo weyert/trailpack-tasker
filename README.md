@@ -210,10 +210,10 @@ MIT
 
 [npm-image]: https://img.shields.io/npm/v/trailpack-tasker2.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/trailpack-tasker2
-[ci-image]: https://img.shields.io/travis/jaertgeerts/trailpack-tasker2/master.svg?style=flat-square
-[ci-url]: https://travis-ci.org/jaertgeerts/trailpack-tasker2
-[daviddm-image]: http://img.shields.io/david/jaertgeerts/trailpack-tasker2.svg?style=flat-square
-[daviddm-url]: https://david-dm.org/jaertgeerts/trailpack-tasker2
-[codeclimate-image]: https://img.shields.io/codeclimate/github/jaertgeerts/trailpack-tasker2.svg?style=flat-square
-[codeclimate-url]: https://codeclimate.com/github/jaertgeerts/trailpack-tasker2
+[ci-image]: https://img.shields.io/travis/jaertgeerts/trailpack-tasker/master.svg?style=flat-square
+[ci-url]: https://travis-ci.org/jaertgeerts/trailpack-tasker
+[daviddm-image]: http://img.shields.io/david/jaertgeerts/trailpack-tasker.svg?style=flat-square
+[daviddm-url]: https://david-dm.org/jaertgeerts/trailpack-tasker
+[codeclimate-image]: https://img.shields.io/codeclimate/github/jaertgeerts/trailpack-tasker.svg?style=flat-square
+[codeclimate-url]: https://codeclimate.com/github/jaertgeerts/trailpack-tasker
 
