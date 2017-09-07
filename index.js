@@ -38,6 +38,7 @@ module.exports = class TaskerTrailpack extends Trailpack {
     this.app.tasker = new Client(this.app, rabbit, taskerConfig.exchangeName)
     TaskerUtils.registerTasks(profile, this.app, rabbit)
 
+    this.app.workerCount = 0
     this.app.api.tasks = this.app.api.tasks || {}
   }
 
