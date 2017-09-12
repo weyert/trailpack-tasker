@@ -1,4 +1,4 @@
-# trailpack-tasker
+# trailpack-tasker2
 
 [![NPM version][npm-image]][npm-url]
 [![Build status][ci-image]][ci-url]
@@ -210,8 +210,8 @@ MIT
 
 [npm-image]: https://img.shields.io/npm/v/trailpack-tasker2.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/trailpack-tasker2
-[ci-image]: https://img.shields.io/travis/jaertgeerts/trailpack-tasker/master.svg?style=flat-square
-[ci-url]: https://travis-ci.org/jaertgeerts/trailpack-tasker
+[ci-image]: https://img.shields.io/travis/JAertgeerts/trailpack-tasker/master.svg?style=flat-square
+[ci-url]: https://travis-ci.org/JAertgeerts/trailpack-tasker
 [daviddm-image]: http://img.shields.io/david/jaertgeerts/trailpack-tasker.svg?style=flat-square
 [daviddm-url]: https://david-dm.org/jaertgeerts/trailpack-tasker
 [codeclimate-image]: https://img.shields.io/codeclimate/github/JAertgeerts/trailpack-tasker.svg?style=flat-square
