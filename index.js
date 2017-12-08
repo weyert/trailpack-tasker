@@ -17,10 +17,14 @@ module.exports = class TaskerTrailpack extends Trailpack {
    * TODO document method
    */
   validate() {
+    this.app.log.debug('trailpackTasker.validate()');
     this.app.config.tasker = _.defaultsDeep(this.app.config.tasker, config.defaults)
     return new Promise((resolve, reject) => {
       joi.validate(this.app.config.tasker, config.schema, (err, value) => {
-        if (err) return reject(new Error('Tasker Configuration: ' + err))
+        if (err) {
+          this.app.log.debug('trailpackTasker.validate() Error: ', err);
+          return reject(new Error('Tasker Configuration: ' + err))
+        }
 
         return resolve(value)
       })
@@ -31,9 +35,12 @@ module.exports = class TaskerTrailpack extends Trailpack {
    * configure rabbitmq exchanges, queues, bindings and handlers
    */
   configure() {
+    this.app.log.debug('trailpackTasker.configure()');
     let taskerConfig = this.app.config.tasker
+    this.app.log.debug('[1] taskerConfig: ', taskerConfig)
     const profile = getWorkerProfile(taskerConfig)
     taskerConfig = configureExchangesAndQueues(profile, taskerConfig)
+    this.app.log.debug('profile: ', profile)
 
     this.app.tasker = new Client(this.app, rabbit, taskerConfig.exchangeName)
     TaskerUtils.registerTasks(profile, this.app, rabbit)
@@ -46,13 +53,17 @@ module.exports = class TaskerTrailpack extends Trailpack {
    * Establish connection to the RabbitMQ exchange, listen for tasks.
    */
   initialize() {
+    this.app.log.debug('trailpackTasker.initialize()');
+
     this.app.on('trails:ready', () => {
       return new Promise((resolve, reject) => {
           rabbit.configure(this.app.config.tasker)
           .then((result => {
+            this.app.log.debug('Connected to Rabbitmq', result)
             return resolve(true)
           }))
-          .catch(Err => {
+          .catch(err => {
+            this.app.log.debug('Failed to connect to the Rabbitmq cluster', err)
             return resolve(false)
           })
       })
@@ -75,6 +86,7 @@ module.exports = class TaskerTrailpack extends Trailpack {
  */
 function getWorkerProfile(taskerConfig) {
   const profileName = taskerConfig.worker
+  console.log('trailpackTasker.getWorkerProfile() profileName: %s', profileName);
 
   if (!profileName || !taskerConfig.profiles[profileName]) {
     return { tasks: [] }
@@ -94,6 +106,7 @@ function configureExchangesAndQueues(profile, taskerConfig) {
   const workQueueName = taskerConfig.workQueueName || 'tasker-work-q'
   const interruptQueueName = taskerConfig.interruptQueueName || 'tasker-interrupt-q'
   const limit = taskerConfig.concurrentTasks || 10
+  console.log('trailpackTasker.configureExchangesAndQueues()', exchangeName, workQueueName, interruptQueueName, limit);
 
   taskerConfig.exchangeName = exchangeName
   taskerConfig.exchanges = [{
