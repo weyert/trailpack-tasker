@@ -47,7 +47,15 @@ module.exports = class TaskerTrailpack extends Trailpack {
    */
   initialize() {
     this.app.on('trails:ready', () => {
-      return Promise.resolve(rabbit.configure(this.app.config.tasker))
+      return new Promise((resolve, reject) => {
+          rabbit.configure(this.app.config.tasker)
+          .then((result => {
+            return resolve(true)
+          }))
+          .catch(Err => {
+            return resolve(false)
+          })
+      })
     })
   }
 
@@ -85,6 +93,7 @@ function configureExchangesAndQueues(profile, taskerConfig) {
   const exchangeName = taskerConfig.exchange || 'tasker-work-x'
   const workQueueName = taskerConfig.workQueueName || 'tasker-work-q'
   const interruptQueueName = taskerConfig.interruptQueueName || 'tasker-interrupt-q'
+  const limit = taskerConfig.concurrentTasks || 10
 
   taskerConfig.exchangeName = exchangeName
   taskerConfig.exchanges = [{
@@ -96,11 +105,13 @@ function configureExchangesAndQueues(profile, taskerConfig) {
   taskerConfig.queues = [{
     name: workQueueName,
     autoDelete: false,
-    subscribe: true
+    subscribe: true,
+    limit: limit,
   }, {
     name: interruptQueueName,
     autoDelete: false,
-    subscribe: true
+    subscribe: true,
+    limit: limit,
   }]
 
   taskerConfig.bindings = [{
