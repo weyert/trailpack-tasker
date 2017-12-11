@@ -4,9 +4,7 @@
   "description": "Easily set up background workers with RabbitMQ",
   "homepage": "https://github.com/jaertgeerts/trailpack-tasker",
   "author": {
-    "name": "Jan Aertgeerts",
-    "email": "jan@veno.be",
-    "url": "https://github.com/jaertgeerts"
+    "name": "Weyert de Boer"
   },
   "main": "index.js",
   "keywords": [
@@ -39,6 +37,6 @@
   "eslintConfig": {
     "extends": "trails"
   },
-  "repository": "git@github.com:jaertgeerts/trailpack-tasker.git",
+  "repository": "git@github.com:weyert/trailpack-tasker.git",
   "license": "MIT"
 }
