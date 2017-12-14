@@ -39,6 +39,7 @@ module.exports = class TaskerTrailpack extends Trailpack {
     if (Object.isFrozen(taskerConfig)) {
       taskerConfig = _.clone(taskerConfig);
     }
+    console.log('taskerConfig: ', taskerConfig);
     
     this.app.tasker = new Client(this.app, rabbit, taskerConfig.exchangeName, taskerConfig.retryExchangeName, taskerConfig.maxTaskRetries, taskerConfig.taskRetryDelay)
     TaskerUtils.registerTasks(profile, this.app, rabbit)
