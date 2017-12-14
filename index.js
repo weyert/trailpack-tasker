@@ -36,7 +36,10 @@ module.exports = class TaskerTrailpack extends Trailpack {
     let taskerConfig = this.app.config.tasker
     const profile = getWorkerProfile(taskerConfig)
     taskerConfig = configureExchangesAndQueues(profile, taskerConfig)
-
+    if (Object.isFrozen(taskerConfig)) {
+      taskerConfig = _.clone(taskerConfig);
+    }
+    
     this.app.tasker = new Client(this.app, rabbit, taskerConfig.exchangeName, taskerConfig.retryExchangeName, taskerConfig.maxTaskRetries, taskerConfig.taskRetryDelay)
     TaskerUtils.registerTasks(profile, this.app, rabbit)
 
