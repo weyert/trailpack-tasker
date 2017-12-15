@@ -39,7 +39,7 @@ module.exports = class TaskerTrailpack extends Trailpack {
     if (Object.isFrozen(taskerConfig)) {
       taskerConfig = _.clone(taskerConfig);
     }
-    
+
     this.app.tasker = new Client(this.app, rabbit, taskerConfig.exchangeName, taskerConfig.retryExchangeName, taskerConfig.maxTaskRetries, taskerConfig.taskRetryDelay)
     TaskerUtils.registerTasks(profile, this.app, rabbit)
 
@@ -83,6 +83,8 @@ module.exports = class TaskerTrailpack extends Trailpack {
  */
 function getWorkerProfile(taskerConfig) {
   const profileName = taskerConfig.worker
+  console.log('workerName: ', taskerConfig.worker);
+  console.log('taskerConfig: ', profileName);
 
   if (!profileName || !taskerConfig.profiles[profileName]) {
     return { tasks: [] }
@@ -116,7 +118,10 @@ function configureExchangesAndQueues(profile, taskerConfig) {
     },
     {
       name: retryExchangeName,
-      type: 'fanout',
+      type: 'x-delayed-message',
+      arguments: {
+          'x-delayed-type': 'topic'
+      },
       autoDelete: false
     }
   ]
@@ -137,9 +142,10 @@ function configureExchangesAndQueues(profile, taskerConfig) {
     {
       name: retryQueueName,
       deadLetterExchange: exchangeName,
-      noAck: true,
+      deadLetterRoutingKey: "#",
+      noAck: false,
       autoDelete: false,
-      subscribe: false,
+      subscribe: true,
       limit: limit,
     }
   ]
@@ -161,6 +167,17 @@ function configureExchangesAndQueues(profile, taskerConfig) {
       keys: profile.tasks.map(task => task + '.retry')
     },
   ];
+
+  if (process.env.ENABLE_RABBITMQ_LOGGING == 'true') {
+    taskerConfig.logging = {
+      adapters: {
+        stdOut: { // adds a console logger at the "info" level
+          level: 4,
+            bailIfDebug: true
+        }
+      }
+    };
+  }
 
   return taskerConfig
 }
