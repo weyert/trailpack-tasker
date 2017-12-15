@@ -1,6 +1,6 @@
 {
   "name": "trailpack-tasker2",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Easily set up background workers with RabbitMQ",
   "homepage": "https://github.com/jaertgeerts/trailpack-tasker",
   "author": {

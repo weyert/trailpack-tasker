@@ -83,8 +83,6 @@ module.exports = class TaskerTrailpack extends Trailpack {
  */
 function getWorkerProfile(taskerConfig) {
   const profileName = taskerConfig.worker
-  console.log('workerName: ', taskerConfig.worker);
-  console.log('taskerConfig: ', profileName);
 
   if (!profileName || !taskerConfig.profiles[profileName]) {
     return { tasks: [] }
