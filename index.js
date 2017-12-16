@@ -40,7 +40,7 @@ module.exports = class TaskerTrailpack extends Trailpack {
       taskerConfig = _.clone(taskerConfig);
     }
 
-    this.app.tasker = new Client(this.app, rabbit, taskerConfig.exchangeName, taskerConfig.retryExchangeName, taskerConfig.maxTaskRetries, taskerConfig.taskRetryDelay)
+    this.app.tasker = new Client(this.app, rabbit, taskerConfig.exchangeName, taskerConfig.retryExchangeName, taskerConfig.maxTaskRetries, taskerConfig.taskRetryDelay, taskerConfig.taskFactor)
     TaskerUtils.registerTasks(profile, this.app, rabbit)
 
     this.app.workerCount = 0
