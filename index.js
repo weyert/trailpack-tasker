@@ -55,12 +55,12 @@ module.exports = class TaskerTrailpack extends Trailpack {
       return new Promise((resolve, reject) => {
           rabbit.configure(this.app.config.tasker)
             .then((result => {
-              this.app.log.debug('Successfully connected to RabbitMQ server.')
+              console.log('Successfully connected to RabbitMQ server.')
               return resolve(true)
             }))
             .catch(err => {
-              this.app.log.debug('Failed to connect to the RabbitMQ server.')
-              this.app.log.debug('Related error: ', err)
+              console.log('Failed to connect to the RabbitMQ server.')
+              console.log('Related error: ', err)
               return resolve(false)
             })
       })
@@ -170,7 +170,7 @@ function configureExchangesAndQueues(profile, taskerConfig) {
     taskerConfig.logging = {
       adapters: {
         stdOut: { // adds a console logger at the "info" level
-          level: 4,
+          level: 5,
             bailIfDebug: true
         }
       }
