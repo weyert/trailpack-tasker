@@ -18,14 +18,14 @@
     "lodash": "^4.17.4",
     "uuid": "^3.0.1",
     "rabbot": "weyert/rabbot#54ebdb3b3e04c65b58eb7c827c8e244fae47ec87",
-    "trailpack": "^3"
+    "trailpack": "^3.0.0"
   },
   "devDependencies": {
     "eslint": "^3.13.1",
     "eslint-config-trails": "^2.0.6",
     "mocha": "^3.0.2",
     "smokesignals": "^2.1.0",
-    "trails": "^3"
+    "trails": "^3.2.1"
   },
   "scripts": {
     "test": "eslint . && mocha"
