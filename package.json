@@ -17,7 +17,7 @@
     "joi": "^10.1.0",
     "lodash": "^4.17.4",
     "uuid": "^3.0.1",
-    "rabbot": "^2.1.0",
+    "rabbot": "weyert/rabbot#54ebdb3b3e04c65b58eb7c827c8e244fae47ec87",
     "trailpack": "^3",
     "trails-service": "^3"
   },
