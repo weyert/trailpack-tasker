@@ -18,7 +18,7 @@
     "lodash": "^4.17.4",
     "uuid": "^3.0.1",
     "rabbot": "^2.1.0",
-    "trailpack": "^3,
+    "trailpack": "^3",
     "trails-service": "^3"
   },
   "devDependencies": {
