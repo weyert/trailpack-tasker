@@ -105,6 +105,7 @@ function configureExchangesAndQueues(profile, taskerConfig) {
   const interruptQueueName = taskerConfig.interruptQueueName || 'tasker-interrupt-q'
   const retryQueueName = taskerConfig.retryQueueName || 'tasker-retry-q'
   const limit = taskerConfig.concurrentTasks || 10
+  const supportRetry = taskerConfig.supportRetry || false
 
   taskerConfig.exchangeName = exchangeName
   taskerConfig.retryExchangeName = retryExchangeName
@@ -113,16 +114,22 @@ function configureExchangesAndQueues(profile, taskerConfig) {
       name: exchangeName,
       type: 'topic',
       autoDelete: false
-    },
-    {
-      name: retryExchangeName,
-      type: 'x-delayed-message',
-      arguments: {
-          'x-delayed-type': 'topic'
-      },
-      autoDelete: false
     }
   ]
+
+  if (supportRetry) {
+    taskerConfig.exchanges = [
+      ...taskerConfig.exchanges,
+      {
+        name: retryExchangeName,
+        type: 'x-delayed-message',
+        arguments: {
+            'x-delayed-type': 'topic'
+        },
+        autoDelete: false
+      }
+    ]
+  }
 
   taskerConfig.queues = [
     {
@@ -137,16 +144,22 @@ function configureExchangesAndQueues(profile, taskerConfig) {
       subscribe: true,
       limit: limit,
     },
-    {
-      name: retryQueueName,
-      deadLetterExchange: exchangeName,
-      deadLetterRoutingKey: "#",
-      noAck: false,
-      autoDelete: false,
-      subscribe: true,
-      limit: limit,
-    }
   ]
+
+  if (supportRetry) {
+    taskerConfig.queues = [
+      ...taskerConfig.queues,
+      {
+        name: retryQueueName,
+        deadLetterExchange: exchangeName,
+        deadLetterRoutingKey: "#",
+        noAck: false,
+        autoDelete: false,
+        subscribe: true,
+        limit: limit,
+      }
+    ]
+  }
 
   taskerConfig.bindings = [
     {
@@ -158,13 +171,19 @@ function configureExchangesAndQueues(profile, taskerConfig) {
       exchange: exchangeName,
       target: interruptQueueName,
       keys: profile.tasks.map(task => task + '.interrupt')
-    },
-    {
-      exchange: retryExchangeName,
-      target: retryQueueName,
-      keys: profile.tasks.map(task => task + '.retry')
-    },
+    }
   ];
+
+  if (supportRetry) {
+    taskerConfig.bindings = [
+      ...taskerConfig.bindings,
+      {
+        exchange: retryExchangeName,
+        target: retryQueueName,
+        keys: profile.tasks.map(task => task + '.retry')
+      }
+    ]  
+  }
 
   if (process.env.ENABLE_RABBITMQ_LOGGING == 'true') {
     taskerConfig.logging = {
