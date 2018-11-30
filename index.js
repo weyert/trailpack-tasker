@@ -55,12 +55,12 @@ module.exports = class TaskerTrailpack extends Trailpack {
       return new Promise((resolve, reject) => {
           rabbit.configure(this.app.config.tasker)
             .then((result => {
-              console.log('Successfully connected to RabbitMQ server.')
+              this.app.log.info('Successfully connected to RabbitMQ server.')
               return resolve(true)
             }))
             .catch(err => {
-              console.log('Failed to connect to the RabbitMQ server.')
-              console.log('Related error: ', err)
+              this.app.log.error('Failed to connect to the RabbitMQ server.')
+              this.app.log.error('Related error: ', err)
               return resolve(false)
             })
       })
