@@ -14,9 +14,9 @@
   ],
   "dependencies": {
     "amqplib": "^0.5.1",
-    "joi": "^10.1.0",
-    "lodash": "^4.17.4",
-    "uuid": "^3.0.1",
+    "joi": "^14.3.0",
+    "lodash": "^4.17.11",
+    "uuid": "^3.3.2",
     "rabbot": "weyert/rabbot",
     "trailpack": "^2.1.0",
     "trails-service": "^2.0.0"
